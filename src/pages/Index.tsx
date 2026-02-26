@@ -11,14 +11,21 @@ const liveMatches = [
 ];
 
 const teamRankings = [
-  { rank: 1, name: "NAVI", pts: 1000, country: "🇺🇦", change: 0 },
-  { rank: 2, name: "G2 Esports", pts: 943, country: "🇪🇸", change: 1 },
-  { rank: 3, name: "FaZe Clan", pts: 912, country: "🇩🇪", change: -1 },
-  { rank: 4, name: "Team Vitality", pts: 887, country: "🇫🇷", change: 2 },
-  { rank: 5, name: "Heroic", pts: 854, country: "🇩🇰", change: 0 },
-  { rank: 6, name: "Astralis", pts: 821, country: "🇩🇰", change: -2 },
-  { rank: 7, name: "Cloud9", pts: 798, country: "🇷🇺", change: 1 },
-  { rank: 8, name: "NIP", pts: 762, country: "🇸🇪", change: -1 },
+  { rank: 1,  name: "Vanity Team",     pts: 1000, wl: "34/8",  wr: "81%", change: 0  },
+  { rank: 2,  name: "MV Team",         pts: 840,  wl: "31/10", wr: "76%", change: 1  },
+  { rank: 3,  name: "XTREME Gaming",   pts: 828,  wl: "29/12", wr: "71%", change: 0  },
+  { rank: 4,  name: "Evo Team",        pts: 820,  wl: "27/14", wr: "66%", change: -1 },
+  { rank: 5,  name: "Steel Curtain",   pts: 762,  wl: "26/15", wr: "63%", change: 2  },
+  { rank: 6,  name: "Void Runners",    pts: 703,  wl: "25/16", wr: "61%", change: -1 },
+  { rank: 7,  name: "Blaze Squad",     pts: 645,  wl: "24/17", wr: "59%", change: 0  },
+  { rank: 8,  name: "Arctic Force",    pts: 587,  wl: "22/19", wr: "54%", change: 1  },
+  { rank: 9,  name: "Shadow Protocol", pts: 529,  wl: "21/20", wr: "51%", change: 0  },
+  { rank: 10, name: "Tungsten Edge",   pts: 470,  wl: "20/21", wr: "49%", change: -1 },
+  { rank: 11, name: "Red Faction",     pts: 412,  wl: "19/22", wr: "46%", change: 0  },
+  { rank: 12, name: "Quantum Rush",    pts: null, wl: "—",     wr: "—",   change: 0  },
+  { rank: 13, name: "Night Owls",      pts: null, wl: "—",     wr: "—",   change: 0  },
+  { rank: 14, name: "Titan Forge",     pts: null, wl: "—",     wr: "—",   change: 0  },
+  { rank: 15, name: "Last Stand",      pts: null, wl: "—",     wr: "—",   change: 0  },
 ];
 
 const playerRankings = [
@@ -254,26 +261,38 @@ export default function Index() {
             </div>
 
             {rankTab === "teams" ? (
-              <div className="divide-y divide-dark-border">
-                {teamRankings.map((t, i) => (
-                  <div
-                    key={t.rank}
-                    className="flex items-center gap-3 px-3 py-2 hover:bg-dark-hover transition-colors cursor-pointer group animate-slide-right"
-                    style={{ animationDelay: `${i * 40}ms` }}
-                  >
-                    <span className={`w-5 text-center font-display font-bold text-xs ${t.rank <= 3 ? "text-rank-gold" : "text-white/30"}`}>
-                      {t.rank}
-                    </span>
-                    <span className="text-sm">{t.country}</span>
-                    <span className="flex-1 font-body text-sm text-white/80 group-hover:text-white transition-colors truncate">{t.name}</span>
-                    <div className="flex items-center gap-1.5">
-                      <span className="font-display text-xs text-white/50">{t.pts}</span>
-                      <span className={`text-[10px] font-body ${t.change > 0 ? "text-win-green" : t.change < 0 ? "text-live-red" : "text-white/20"}`}>
-                        {t.change > 0 ? `▲${t.change}` : t.change < 0 ? `▼${Math.abs(t.change)}` : "—"}
+              <div>
+                {/* Header row */}
+                <div className="flex items-center gap-2 px-3 py-1.5 border-b border-dark-border bg-dark-bg/60">
+                  <span className="w-5 text-center text-[9px] text-white/25 font-display uppercase">#</span>
+                  <span className="flex-1 text-[9px] text-white/25 font-display uppercase tracking-wider">Команда</span>
+                  <span className="w-10 text-right text-[9px] text-white/25 font-display uppercase">Очки</span>
+                  <span className="w-10 text-right text-[9px] text-white/25 font-display uppercase">W/L</span>
+                  <span className="w-8 text-right text-[9px] text-white/25 font-display uppercase">%</span>
+                </div>
+                <div className="max-h-80 overflow-y-auto divide-y divide-dark-border">
+                  {teamRankings.map((t, i) => (
+                    <div
+                      key={t.rank}
+                      className="flex items-center gap-2 px-3 py-2 hover:bg-dark-hover transition-colors cursor-pointer group animate-slide-right"
+                      style={{ animationDelay: `${i * 30}ms` }}
+                    >
+                      <span className={`w-5 text-center font-display font-bold text-xs shrink-0 ${t.rank <= 3 ? "text-rank-gold" : t.rank <= 11 ? "text-white/40" : "text-white/20"}`}>
+                        {t.rank}
                       </span>
+                      <span className="flex-1 font-body text-xs text-white/80 group-hover:text-white transition-colors truncate">{t.name}</span>
+                      <span className="w-10 text-right font-display text-xs text-neon font-bold shrink-0">
+                        {t.pts ?? <span className="text-white/20">—</span>}
+                      </span>
+                      <span className="w-10 text-right font-body text-[10px] text-white/40 shrink-0">{t.wl}</span>
+                      <span className={`w-8 text-right font-display text-[10px] font-semibold shrink-0 ${
+                        t.wr === "—" ? "text-white/20" :
+                        parseInt(t.wr) >= 70 ? "text-win-green" :
+                        parseInt(t.wr) >= 55 ? "text-rank-gold" : "text-live-red"
+                      }`}>{t.wr}</span>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             ) : (
               <div className="divide-y divide-dark-border">
