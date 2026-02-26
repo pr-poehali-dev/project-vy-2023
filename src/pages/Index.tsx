@@ -22,10 +22,6 @@ const teamRankings = [
   { rank: 9,  name: "Shadow Protocol", pts: 529,  wl: "21/20", wr: "51%", change: 0  },
   { rank: 10, name: "Tungsten Edge",   pts: 470,  wl: "20/21", wr: "49%", change: -1 },
   { rank: 11, name: "Red Faction",     pts: 412,  wl: "19/22", wr: "46%", change: 0  },
-  { rank: 12, name: "Quantum Rush",    pts: null, wl: "—",     wr: "—",   change: 0  },
-  { rank: 13, name: "Night Owls",      pts: null, wl: "—",     wr: "—",   change: 0  },
-  { rank: 14, name: "Titan Forge",     pts: null, wl: "—",     wr: "—",   change: 0  },
-  { rank: 15, name: "Last Stand",      pts: null, wl: "—",     wr: "—",   change: 0  },
 ];
 
 const playerRankings = [
